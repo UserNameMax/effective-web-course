@@ -1,0 +1,50 @@
+ul.hr {
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 0px; /* Значение полей */
+   }
+ul.hr li {
+	float: left;
+	margin-left: 35px;
+	color: #6C5CE7;
+	list-style-type: disc;
+   }
+.hr {
+	float: left; 
+}
+.button{
+	float: left;
+	margin:0px;
+	margin-left: 5%;	
+	background-color: RGB(108, 92, 231);
+	border: 10px solid RGB(108, 92, 231);
+	border-radius: 20px;
+	color: #ffffff
+}
+.h{
+	display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius:20px 20px 0px 0px;
+  border-bottom-style:solid;
+  border-color: #ffffff;
+}
+
+body{
+	background-color: #A29BFE;
+	font-family: 'Inter';
+}
+
+#grid{
+	margin: 0%;
+	margin-right: 5%;
+	font-size: 48px;
+}
+
+#hiw{
+	margin: 0%;
+	margin-left: 35px;
+}
+#block1{
+	background-color: #000000;
+}
