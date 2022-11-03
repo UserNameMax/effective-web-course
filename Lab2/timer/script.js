@@ -11,11 +11,17 @@ let audio = new Audio("sound.mp3");
 
 let startTime = localStorage.getItem("startTime") ?? 0;
 let time = localStorage.getItem("time") ?? 0;
+let state = localStorage.getItem("state") ?? 0;
 
 changeElementsState(true);
 printTime();
 
-startButton.onclick = function (event) {
+if (state == 1) {
+  startTimer();
+}
+
+startButton.onclick = startTimer;
+function startTimer() {
   let min = Number(minBox.value);
   let sec = Number(secBox.value);
   if (isNaN(min) || isNaN(sec)) {
@@ -25,17 +31,20 @@ startButton.onclick = function (event) {
   if (min == 0 && sec == 0) return;
   startTime = time = min * 60 + sec;
   timer = setInterval(timerTick, 1000);
+  state = 1;
   changeElementsState(false);
-};
+}
 
 stopButton.onclick = function (event) {
   clearInterval(timer);
-  changeElementsState(true);
-  resetButton.disabled = false;
+  state = 0;
+  startButton.disabled = false;
+  stopButton.disabled = true;
 };
 
 resetButton.onclick = function (event) {
   clearInterval(timer);
+  state = 0;
   changeElementsState(true);
   time = startTime;
   printTime();
@@ -68,21 +77,22 @@ function timerTick() {
   printTime();
   if (time == 0) {
     clearInterval(timer);
+    state = 0;
     stopButton.disabled = true;
     document.body.style.backgroundColor = "#ff2b2b";
     audio.play();
   }
 }
 
-function changeElementsState(state) {
+function changeElementsState(stateEl) {
   minBox.disabled =
     secBox.disabled =
     startButton.disabled =
     min1.disabled =
     min5.disabled =
     min10.disabled =
-      !state;
-  stopButton.disabled = resetButton.disabled = state;
+      !stateEl;
+  stopButton.disabled = resetButton.disabled = stateEl;
 }
 
 function printTime() {
@@ -93,4 +103,5 @@ function printTime() {
 window.onunload = function (event) {
   localStorage.setItem("time", time);
   localStorage.setItem("startTime", startTime);
+  localStorage.setItem("state", state);
 };
